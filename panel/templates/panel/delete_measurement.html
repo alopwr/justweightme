@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <main role="main" class="container jumbotron">
+        <form method="post">{% csrf_token %}
+            <h1 class="display-4">Czy jesteś pewien że chcesz usunąć pomiar z <br/>{{ object.created_at }}?</h1>
+            <input class="btn btn-danger btn-lg btn-block" type="submit" value="Usuń">
+        </form>
+    </main>
+
+{% endblock %}

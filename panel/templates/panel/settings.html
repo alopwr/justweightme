@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    {{ form.media }}
+    <main role="main" class="container jumbotron">
+        {% include 'panel/goal_modal.html' %}
+        <h1 class="display-5">Ustawienia profilu</h1>
+        <form method="post">{% csrf_token %}
+            {% bootstrap_form form exclude='goal_weight' %}
+            <label for="id_goal_weight" data-toggle="modal"
+                   data-target="#goalModal"><abbr title='Kliknij aby przeczytać'>Wymarzona masa (cel)</abbr></label>
+            {% bootstrap_field form.goal_weight addon_after="<b>kg</b>" %}
+            <input type="submit" class="btn btn-primary" value="Zmień">
+        </form>
+    </main>
+{% endblock %}

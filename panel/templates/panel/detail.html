@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load design_filters %}
+{% load static %}
+{% block content %}
+    {% include 'panel/bmi_modal.html' %}
+    <main role="main" class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="btn btn-primary disabled btn-block">
+                    {{ object }}
+                </div>
+            </div>
+            <div class="row group">
+                <div class="col">
+                    <div class="card border-primary mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-primary">Masa ciała</div>
+                        <div class="card-body text-primary">
+                            <h5 class="card-title">{{ object.weight|none_to_dash }} kg</h5>
+                            {#                            <p class="card-text">Ważyłeś {{ object.weight }} kilogramów</p>#}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+
+                    <div class="card border-primary mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-primary">Tkanka tłuszczowa</div>
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ object.bf_percent|none_to_dash }}%</h5>
+                            {#                            <p class="card-text">Twoje ciało składało się w {{ object.bf_percent }}% z tłuszczu.</p>#}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-light {{ object.bmi|bmi_class }} mb-3" data-toggle="modal"
+                         data-target="#bmiModal"
+                         title="Kliknij aby przeczytać więcej"
+                         style="max-width: 18rem;">
+                        <div class="card-header"><abbr title="Kliknij aby przeczytać więcej">BMI</abbr></div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.bmi }}</h5>
+                            <p class="card-text">Twój wskaźnik masy ciała wskazuje {{ object.bmi|bmi_description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row group">
+                <div class="col ">
+                    <a class="btn btn-success btn-block" href="{% url 'new' %}">Dodaj nowy pomiar ręcznie</a>
+                    <a href="{% url 'delete' object.id %}" class="btn btn-danger btn-block text-light">Usuń ten pomiar
+                        &#10008;</a>
+                </div>
+            </div>
+            <h2 class="display-5" style="margin-top: 25px;">Ostatnie pomiary</h2>
+            <div class="container">
+                <ul class="list-group" style="overflow: auto; max-height:200px">
+                    {% for measurement in object_list %}
+                        {% if measurement == object %}
+                            <a href="{% url 'detail' measurement.id %}"
+                               class="list-group-item list-group-item-action active">{{ measurement.created_at }} {{ measurement.weight|none_to_dash }}kg {{ measurement.bf_percent|none_to_dash }}%</a>
+                        {% else %}
+                            <a href="{% url 'detail' measurement.id %}"
+                               class="list-group-item list-group-item-action">{{ measurement.created_at }} {{ measurement.weight|none_to_dash }}kg {{ measurement.bf_percent|none_to_dash }}%</a>
+                        {% endif %}
+                    {% empty %}
+                        Brak pomiarów. Dodaj pomiar!
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'panel/js/detail.min.js' %}"></script>
+{% endblock %}

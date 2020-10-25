@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block extra_style %}
+    <link rel="stylesheet" href="{% static 'panel/css/view_with_charts.min.css' %}">
+{% endblock %}
+{% block content %}
+    <main role="main" class="container jumbotron" style="margin-bottom: -20px;padding-left:2rem;padding-right: 2rem;">
+        <form method="post">{% csrf_token %}
+            <h3><b>Wybierz okres czasu, z którego chcesz wygenerować wykres</b></h3>
+            {% bootstrap_form form %}
+            <input class="btn btn-primary" type="submit" value="Generuj">
+        </form>
+        <hr/>
+    </main>
+    <main role="main" class="jumbotron-not-on-mobile container" style="background-color: #e9ecef; margin-top: -10px;">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        {% autoescape off %}
+            {{ chart_js_code }}
+        {% endautoescape %}
+    </main>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static 'panel/js/charts_view.min.js' %}"></script>
+    <script src="{% static 'panel/js/view_with_chart.min.js' %}"></script>
+{% endblock %}

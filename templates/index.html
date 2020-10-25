@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% load bootstrap4 %}
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-164289956-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-164289956-1');
+</script>
+
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>justweight.me - przyjemne odchudzanie</title>
+
+    {% bootstrap_css %}
+
+    <!-- Custom fonts for this template -->
+    <script src="https://kit.fontawesome.com/4fb3fcc692.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{% static "vendor/simple-line-icons/css/simple-line-icons.css" %}">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="{% static "device-mockups/device-mockups.min.css" %}">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/new-age.min.css" %}" rel="stylesheet">
+<meta name="google-site-verification" content="WZV3KxHxeTzYtDHs-vpj6LNams0v0vnhsIsdz8iinvM" />
+</head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top" style="text-decoration: none;"><h1><i
+                class="fas fa-weight"></i>
+            <b>justweight.me</b></h1></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            Menu☰
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item button">
+                    <a class="nav-link btn btn-outline" href="{% url "dashboard" %}" id="special-btn">Przejdź do
+                        serwisu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#download">Pobierz na Androida</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#features">Funkcje</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-lg-7 my-auto">
+                <div class="header-content mx-auto">
+                    <h1 class="mb-5">justweight.me to serwis, który pomoże ci w osiągnięciu wymarzonej wagi.</h1>
+                    <a href="{% url "register" %}" class="btn btn-outline btn-xl">Zarejestruj się!</a>
+                </div>
+            </div>
+            <div class="col-lg-5 my-auto">
+                <div class="device-container">
+                    <div class="device-mockup galaxy_s5 portrait white">
+                        <div class="device">
+                            <div class="screen">
+                                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                <img src="{% static "img/demo-screen-1.jpg" %}" class="img-fluid" alt="">
+                            </div>
+                            <div class="button">
+                                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="download bg-primary text-center" id="download">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2 class="section-heading">Zacznij już teraz!</h2>
+                <p>Nasz serwis jest dostępny poprzez stronę internetową, ale sprawdź też naszego klienta na
+                    Androida!</p>
+                <div class="badges">
+                    <a class="badge-link" href="https://github.com/Gladko/justweight-android/releases/tag/0.1"><img src="{% static "img/google-play-badge.svg" %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-heading text-center">
+            <h2>Twoja waga zasługuje na uwagę.</h2>
+            <p class="text-muted">justweight.me sprawi, że jej monitorowanie będzie czystą przyjemnością.</p>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 my-auto">
+                <div class="device-container">
+                    <div class="device-mockup iphone6_plus portrait white">
+                        <div class="device">
+                            <div class="screen">
+                                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                <img src="{% static "img/demo-screen-1.jpg" %}" class="img-fluid" alt="">
+                            </div>
+                            <div class="button">
+                                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 my-auto">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-screen-smartphone text-primary"></i>
+                                <h3>Synchronizacja</h3>
+                                <p class="text-muted">Kot zjadł twój dziennik odchudzania? Nigdy więcej. Z
+                                    justweight.me
+                                    twoje dane będą synchronizowane i bezpieczne.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-camera text-primary"></i>
+                                <h3>Przejrzystość</h3>
+                                <p class="text-muted">Twoje cele, aktualna waga i szczegóły pomiarów zawsze pod
+                                    ręką.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-present text-primary"></i>
+                                <h3>Darmowy i otwarty</h3>
+                                <p class="text-muted">Zarówno kod klienta na Androida, jak i serwera jest otwarty.
+                                    Możesz hostować go samodzielnie, aby mieć pewność, że twoje dane należą tylko do
+                                    ciebie.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-lock-open text-primary"></i>
+                                <h3>Prywatność</h3>
+                                <p class="text-muted">Nie przetwarzamy twoich danych w celach marketingowych, w
+                                    przeciwieństwie do większości konkurencyjnych usług. Właściwie to w ogóle nie ma tu
+                                    reklam.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="cta-content">
+        <div class="container">
+            <h2>Waż tyle, ile zechcesz.</h2>
+            <a href="{% url "register" %}" class="btn btn-outline btn-xl">Zarejestruj się!</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+</section>
+
+<footer>
+    <div class="container">
+        <p><a href="https://m4k5.me"> Maksymilian Skica</a>, Szymon Kowaliński, Mikołaj Rodkiewicz <br>
+            na licencji GPL v3<br>
+            Przygotowano na konkurs <a href="https://hackheroes.pl"> Hack Heroes.</a></p>
+    </div>
+</footer>
+
+{% bootstrap_javascript jquery='full' %}
+
+<!-- Custom scripts for this template -->
+<script src="{% static "js/new-age.min.js" %}"></script>
+
+</body>
+
+</html>

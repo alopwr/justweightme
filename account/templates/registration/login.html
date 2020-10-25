@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block title %}Logowanie{% endblock %}
+
+{% block content %}
+    <div class="container jumbotron">
+        <h1>Logowanie</h1>
+        {% if form.errors %}
+            <p>
+                Nazwa użytkownika lub hasło jest nieprawidłowe.
+                Spróbuj ponownie.
+            </p>
+        {% else %}
+            <p>Wypełnij poniższy formularz, aby się zalogować. Jeżeli nie masz jeszcze konta, możesz je utworzyć <a
+                    href="{% url "register" %}">tutaj</a>.</p>
+        {% endif %}
+        <div class="login-form">
+            <form action="{% url 'login' %}" method="post">
+                {% bootstrap_form form %}
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}"/>
+                <p><input class="btn btn-primary" type="submit" value="Zaloguj"></p>
+            </form>
+            <p><a href="{% url "password_reset" %}">Zapomniałeś hasła?</a></p>
+        </div>
+    </div>
+{% endblock %}

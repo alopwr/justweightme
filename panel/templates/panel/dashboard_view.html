@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% load design_filters %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'panel/css/view_with_charts.min.css' %}">
+{% endblock %}
+{% block content %}
+    <main role="main" class="container">
+        <div class="jumbotron" style="margin-bottom: -30px;">
+            <a class="btn btn-success btn-block" href="{% url 'new' %}">Dodaj nowy pomiar ręcznie </a>
+            {% if  request.user.profile.chart_js_code %}
+                </div> </main>
+                <div class="jumbotron-not-on-mobile container" align="center">
+                    {% if request.user.profile.chart_js_code|first != 'x' %}
+                        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                        {% autoescape off %}
+                            {{ request.user.profile.chart_js_code }}
+                        {% endautoescape %}
+                    {% else %}
+                        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="sr-only">Loading...</span></div>
+                        generowanie wykresu...
+                    {% endif %}
+                </div>
+                <main role="main" class="container">
+                <div class="jumbotron" style="margin-top: -20px;">
+                <a href="{% url 'charts' %}" class='btn btn-outline-primary' style='margin-bottom: 25px;'>Wygeneruj
+                    więcej wykresów &#10148;
+                </a>
+            {% else %}
+                Dodaj swój pierwszy pomiar aby wygenerować wykres.
+            {% endif %}
+            <h1>Ostatnie pomiary</h1>
+            <div class=" container">
+                <ul class="list-group" style="overflow: auto; max-height:200px">
+                    {% for measurement in object_list %}
+                        <a href="{% url 'detail' measurement.id %}"
+                           class="list-group-item list-group-item-action">{{ measurement.created_at }} {{ measurement.weight|none_to_dash }}kg {{ measurement.bf_percent|none_to_dash }}%</a>
+                    {% empty %}
+                        Brak pomiarów. Dodaj pomiar!
+                    {% endfor %}
+                </ul>
+            </div>
+            </div>
+            </main>
+{% endblock %}
+{% block js %}
+    <script>
+        {% if request.user.profile.chart_js_code|first == 'x' %}
+            window.setInterval(function () {
+                $.ajax({
+                    url: "{% url 'ajax-charts' %}",
+                    data: {
+                        '': ''
+                    },
+
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.done) {
+                            console.log(data);
+                            location.reload()
+                        }
+                    }
+                })
+            }, 100);
+        {% endif %}
+    </script>
+    <script src="{% static 'panel/js/view_with_chart.min.js' %}"></script>
+{% endblock %}

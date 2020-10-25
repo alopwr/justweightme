@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block title %}Utwórz konto{% endblock %}
+
+{% block content %}
+    <div class="container jumbotron">
+        <h1>Utwórz konto</h1>
+        <p>Wypełnij poniższy formularz, aby się zarejestrować:</p>
+        <form action="" method="post">
+            {% bootstrap_form user_form %} {% csrf_token %}
+            <p><input type="submit" class="btn btn-primary" value="Utwórz konto"></p>
+        </form>
+    </div>
+{% endblock %}

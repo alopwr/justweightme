@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container jumbotron">
+        {% if request.user.profile.sex == "M" %}
+            <h1>Pomiary dla 3-punktowego testu tkanki tłuszczowej Jackson-Pollock. (Dla mężczyzn)</h1>
+            <hr/>
+            {% include "videos/men/tight.html" %}
+            <hr/>
+            {% include "videos/men/pectoral.html" %}
+            <hr/>
+            {% include "videos/men/abdominal.html" %}
+        {% else %}
+            <h1>Pomiary dla 3-punktowego testu tkanki tłuszczowej Jackson-Pollock. (Dla kobiet)</h1>
+            <hr/>
+            {% include "videos/women/tight.html" %}
+            <hr/>
+            {% include "videos/women/tricep.html" %}
+            <hr/>
+            {% include "videos/women/suprailiac.html" %}
+        {% endif %}
+        Powyższe filmy pochodzą ze strony <a href="https://www.conditiontime.pl">conditiontime.pl</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% load staticfiles %}
+{% load static %}
+{% load gravatar %}
+{% load design_filters %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    {% load bootstrap4 %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {% bootstrap_javascript jquery='full' %}
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4fb3fcc692.js" crossorigin="anonymous"></script>
+
+    <link href="{% static 'css/base.min.css' %}" rel="stylesheet">
+    <style>
+        .jumbotron {
+        {% if request.GET.mobile == '1' %}
+            margin-top: 30px;
+        {% else %}
+            margin-top: 90px;
+        {% endif %}
+            padding: 2rem 2rem;
+            width: 100%;
+        }
+
+        @media (max-width: 474px) {
+            .jumbotron {
+                margin-top: 120px;
+            }
+        }
+
+        .header-bg, #header-bg {
+            background: url("{% static 'img/bg-pattern.png' %}"), linear-gradient(to left, #7b4397, #dc2430);
+        }
+    </style>
+    {% block extra_head %}
+    {% endblock %}
+</head>
+<body>
+{% block header %}
+    {% if not request.GET.mobile == '1' %}
+        <nav class="navbar navbar-expand-lg navbar-fixed-top fixed-top header-bg">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'dashboard' %}"><h1 class="text-light" id="brand"><i
+                        class="fas fa-weight"></i>
+                    justweight.me</h1></a>
+                <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse"
+                        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="text-light">Menu☰</span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" style="margin-left: 15px;">
+                            {% if request.user.is_authenticated %}
+                                {% gravatar request.user.email 50 %}
+                            {% endif %}
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="a-yellow a-margin"
+                                   href="{% url "settings" %}">Ustawienia</a></li>
+                            <li class="nav-item">
+                        {% endif %}
+                        <li class="nav-item">
+                            {% block is_logged %}{{ request.user|is_logged_formula }}{% endblock %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% endif %}
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% block js %}
+{% endblock %}
+</body>
+</html>

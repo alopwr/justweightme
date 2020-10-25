@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load field_filters %}
+{% load static %}
+{% block content %}
+    <main role="main" class="container jumbotron">
+        {% include 'panel/pollock_modal.html' %}
+        <form method="post">{% csrf_token %}
+            {% bootstrap_field form.weight addon_after="<b>kg</b>" %}
+            {% bootstrap_field form.bf_percent addon_after="<div class='input-group-text'><b>%</b></div><button aria-expanded='false' aria-controls='collapse' data-toggle='collapse' data-target='#collapse' class='btn btn-outline-secondary' type='button' id='append-btn'>Wylicz <i class='fas fa-calculator'></i></button>" %}
+            <div id="collapse" class="collapse">
+                <h3><abbr title="Klikniij, aby przeczytać więcej" data-toggle="modal"
+                          data-target="#pollockModal">Jackson-Pollock m. 3-punktowa</abbr>:</h3>
+                {% for field in form.visible_fields|exclude:'weight,bf_percent' %}
+                    {% bootstrap_field field addon_after="<b>mm</b>" %}
+                {% endfor %}
+            </div>
+            <input type="submit" class="btn btn-primary" value="Dodaj">
+        </form>
+    </main>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'panel/js/new_measurement.min.js' %}"></script>
+{% endblock %}
